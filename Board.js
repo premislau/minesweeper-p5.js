@@ -6,21 +6,11 @@ class Board{
         this.fieldSize=fieldSize; //number
         this.leftToReveal=this.width*this.height-this.numberOfMines; //number
         this.marked=0; //number
-        this.initialised; //boolean
+        this.initialised; //boolean, game is initialised when player reveals first field
         this.grid=[]; //matrix of Fields
+        this.victory=false;
+        this.boom=false;
         this.createGrid();
-    }
-
-    write(){
-        let result="";
-        for(let row of this.grid){
-            for(let element of row){
-                //result+=element.hasMine;
-                result+=element.neighbourMines;
-            }
-            result+="\n";
-        }
-        console.log(result);
     }
 
     createGrid(){
@@ -33,7 +23,8 @@ class Board{
         }
     }
 
-    insertMines(immunityX, immunityY){ // used when player chooses first field
+    // used when player chooses first field
+    insertMines(immunityX, immunityY){
         let i=this.numberOfMines;
         while(i>0){
             let x=floor(random(0, this.width));
@@ -108,7 +99,7 @@ class Board{
                         if(this.grid[i][j].marked){
                             fill(255,150,150);
                         }else{
-                            fill(240);
+                            fill(255);
                         }
                         rect(this.fieldSize*i,this.fieldSize*j,this.fieldSize,this.fieldSize);
                         if(this.grid[i][j].neighbourMines>0){
@@ -128,9 +119,21 @@ class Board{
                 }
             }
         }
+        if(this.victory){        
+            textSize(floor(this.fieldSize*this.width/6));
+            fill(255,255,0);
+            text("VICTORY!",width/2,height*0.55);
+        }else if(this.boom){
+            textSize(floor(this.fieldSize*this.width/6));
+            fill(0,255,255);
+            text("BOOM!",width/2,height*0.55);
+        }
     }
 
     revealMousePosition(){
+        if(this.victory||this.boom){
+            return;
+        }
         let x = floor(mouseX/this.fieldSize);
         let y = floor(mouseY/this.fieldSize);
         if (x>=0 && x<this.width && y>=0 && y< this.height){
@@ -140,6 +143,7 @@ class Board{
             }
             if(!this.grid[x][y].revealed && !this.grid[x][y].marked){           
                 if(this.grid[x][y].hasMine){
+                    this.boom=true;
                     console.log("BOOM!");
                     this.revealAll();
                 }else{
@@ -147,6 +151,7 @@ class Board{
                     console.log(this.leftToReveal.toString()+" left to reveal");
                 }
                 if(this.leftToReveal===0){
+                    this.victory=true;
                     console.log("VICTORY!");
                 }
             }
@@ -154,6 +159,9 @@ class Board{
     }
 
     markMousePosition(){
+        if(this.victory||this.boom){
+            return;
+        }
         let x = floor(mouseX/this.fieldSize);
         let y = floor(mouseY/this.fieldSize);
         if (x>=0 && x<this.width && y>=0 && y< this.height){
