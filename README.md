@@ -1,5 +1,5 @@
 # Minesweeper with p5.js
- Minesweeper game created using p5.js library. This project's license is GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
+ Minesweeper game created using p5.js library. This project's license is GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1.
 
 ## Project structure.
 ### index.html
