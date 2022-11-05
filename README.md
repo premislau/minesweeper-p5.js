@@ -1,5 +1,5 @@
 # Minesweeper with p5.js
- Minesweeper game created using p5.js library.
+ Minesweeper game created using p5.js library. This project's license is GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
 
 ## Project structure.
 ### index.html
@@ -18,5 +18,5 @@ p5.js library is necessary to run this game. This project folder should be place
 
 ## Gameplay.
 Some of the fields do contain mines, some do not. To win the game player should reveal all fields which do not contain mines. Revealing mine leads to loss. New game can be started by refreshing site.
-Player can reveal a field by left-clicking it. If "f" game is mark mode – by left-clicking player can toggle a mark of probable position of mine.
-Feedback is provided by graphics: grey fields are unrevealed, black field contains a mine, red field is marked, white field does not contain a mine. Number displayed at revealed field, shows how many neighbour (including diagonal) fields contain mines. Some feedback is also provided through console. Game settings are specified at the begining of the sketch.js file.
+Player can reveal a field by left-clicking it. If "f" key is down, game is inside mark mode – by left-clicking player can toggle a mark of probable position of mine.
+Feedback is provided by graphics: grey field is unrevealed, black field contains a mine, red field is marked, white field does not contain a mine. Number displayed at revealed field, shows how many neighbour (including diagonal) fields contain mines. Some feedback is also provided through console. Game settings are specified at the begining of the sketch.js file.
